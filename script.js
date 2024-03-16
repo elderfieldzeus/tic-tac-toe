@@ -56,15 +56,17 @@ function Game() {
         row.forEach((node) => {
             node.box.addEventListener("click", () => {
                 const player = (body.className == "white") ? playerOne : playerTwo;
-                addSymbol(node.box, player);
-                updateScoreBoard(ScoreBoard, node, player);
-                const status = checkScoreBoard(ScoreBoard);
-                ScoreBoard.turns++;
-                if(status == 1) {
-                    winnerPage(player);
-                }
-                else if(ScoreBoard.turns === 9) {
-                    drawPage();
+                if(node.box.innerHTML.length == 0) {
+                    addSymbol(node.box, player);
+                    updateScoreBoard(ScoreBoard, node, player);
+                    const status = checkScoreBoard(ScoreBoard);
+                    ScoreBoard.turns++;
+                    if(status == 1) {
+                        winnerPage(player);
+                    }
+                    else if(ScoreBoard.turns === 9) {
+                        drawPage();
+                    }
                 }
             });
         })
@@ -75,12 +77,10 @@ function Game() {
 
     //add symbol when clicked
     function addSymbol(box, player) {
-        if(box.innerHTML == 0) {
-            const element = document.createElement("span");
-            element.className = (player.token === 1) ? "circle" : "cross";
-            box.appendChild(element);
-            body.classList = (player.token === 1) ? "black" : "white";
-        }
+        const element = document.createElement("span");
+        element.className = (player.token === 1) ? "circle" : "cross";
+        box.appendChild(element);
+        body.classList = (player.token === 1) ? "black" : "white";
     }
 
     function updateScoreBoard(ScoreBoard, node, player) {
