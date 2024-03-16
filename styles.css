@@ -71,6 +71,7 @@ button {
     border: solid 2px black;
     background-color: var(--box-color);
     cursor: pointer;
+    color: black;
 }
 
 dialog {
